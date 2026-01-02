@@ -1,0 +1,51 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'menu/style.css' %}">
+    <title>Cake World </title>
+</head>
+<body>
+
+<h2 class="page-title">🍰 CAKE WORLD</h2>
+
+<div class="filters">
+    <a href="/"><button>All</button></a>
+    <a href="/?category=cake"><button>Cakes</button></a>
+    <a href="/?category=brownie"><button>Brownies</button></a>
+
+    <form method="get" style="display:inline;">
+        <select name="sort" onchange="this.form.submit()">
+            <option value="">Sort by Price</option>
+            <option value="low">Low to High</option>
+            <option value="high">High to Low</option>
+        </select>
+    </form>
+</div>
+
+<hr>
+
+<div class="menu-grid">
+{% for product in products %}
+    <div class="product">
+
+        <div class="image-wrapper">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-img">
+            {% endif %}
+        </div>
+
+        <div class="product-content">
+            <span class="badge">{{ product.category|title }}</span>
+            <h3>{{ product.name }}</h3>
+            <p class="price">₹{{ product.price }}</p>
+        </div>
+
+    </div>
+{% endfor %}
+</div>
+
+
+</body>
+</html>
